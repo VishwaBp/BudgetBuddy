@@ -1,0 +1,27 @@
+spring:
+  kafka:
+    admin:
+      auto-create-topics: true
+    bootstrap-servers: localhost:9092      # Kafka broker address
+    consumer:
+      group-id: notification-group         # Consumer group ID
+      auto-offset-reset: earliest          # Start from the earliest message if no offset is found
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  sendgrid:
+    api-key: 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         # Replace with the SendGrid API Key
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Replace with your Eureka Server URL
+    fetch-registry: true                          # Optional: fetch the registry information
+    register-with-eureka: true                   # Register this service in Eureka
+  instance:
+    prefer-ip-address: true                      # Prefer IP address instead of hostname
+    instance-id: ${spring.application.name}:${server.port} # Unique instance ID
+server:
+  port: 8080
